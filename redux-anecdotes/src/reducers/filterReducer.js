@@ -1,5 +1,18 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const filterSlice = createSlice({
+    name: 'anecdotes',
+    reducers: {
+        filterReducer(state, action) {
+            
+        },
+        filterChange(state, action) {
+            const filter = action.payload
+            return filter
+        }
+    }
+})
 const filterReducer = (state = '', action) => {
-    console.log('Action ', action)
     switch (action.type) {
         case 'SET_FILTER':
             return action.payload;
@@ -9,11 +22,11 @@ const filterReducer = (state = '', action) => {
 };
 
 export const filterChange = (filter) => {
-    console.log('one', filter)
     return {
         type: 'SET_FILTER',
         payload: filter
     }
 }
-
+/*Change the definition of the filter reducer and action creators 
+to use the Redux Toolkit's createSlice function. */
 export default filterReducer
