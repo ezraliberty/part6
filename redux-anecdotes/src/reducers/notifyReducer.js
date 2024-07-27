@@ -10,18 +10,13 @@ const notifySlice = createSlice({
     setNotification(state, action) {
       return {
         ...state,
-        message: action.payload.message,
-        displayTime: action.payload.displayTime
+        message: "action.payload.message",
+        displayTime: action.payload.displayTime * 1000
       }
     },
     resetNotification (state, action) {
-      return {
-        ...state,
-        message: null,
-        displayTime: 0
-      }
-        // state.message = null;
-        // state.displayTime = 0;
+        state.message = null;
+        state.displayTime = 0;
     }
   },
 });

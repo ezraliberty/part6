@@ -1,8 +1,22 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setNotification } from "../reducers/notifyReducer"
 
 
 const Notification = () => {
-  const notification = useSelector(state => state.notification.message)
+  const dispatch = useDispatch()
+  const {message, displayTime } = useSelector(state => state.notification.message)
+  // const notification = useSelector(state => state.notification.message)
+
+  useEffect(() => {
+    if (message) {
+      const notificationTimeout = setTimeout(() => {
+        dispatchEvent(setNotification('', 0))
+      }, displayTime)
+
+      return () => clearTimeout(notificationTimeout)
+    }
+  }, [dispatch, message, displayTime])
 
   const style = {
     border: 'solid',
@@ -10,13 +24,13 @@ const Notification = () => {
     borderWidth: 1
   }
 
-  if (!notification) {
+  if (!message) {
     return null;
   }
 
   return (
     <div style={style}>
-      {notification}
+      {message}
     </div>
   )
 }
