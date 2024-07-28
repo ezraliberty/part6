@@ -4,28 +4,18 @@ import { setNotification } from "../reducers/notifyReducer"
 
 
 const Notification = () => {
-  const dispatch = useDispatch()
-  const {message, displayTime } = useSelector(state => state.notification.message)
+  const message = useSelector(state => state.notification.message)
+  console.log('message: ', message)
   // const notification = useSelector(state => state.notification.message)
 
-  useEffect(() => {
-    if (message) {
-      const notificationTimeout = setTimeout(() => {
-        dispatchEvent(setNotification('', 0))
-      }, displayTime)
-
-      return () => clearTimeout(notificationTimeout)
-    }
-  }, [dispatch, message, displayTime])
+  if (!message) {
+    return null;
+  }
 
   const style = {
     border: 'solid',
     padding: 10,
     borderWidth: 1
-  }
-
-  if (!message) {
-    return null;
   }
 
   return (
